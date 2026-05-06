@@ -1,0 +1,56 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+env/
+.venv/
+venv/
+*.env
+*.egg-info/
+dist/
+build/
+.mypy_cache/
+.pytest_cache/
+coverage/
+
+# Virtualenvs and caches
+pip-wheel-metadata/
+
+# macOS
+.DS_Store
+
+# VSCode
+.vscode/
+
+# PyCharm
+.idea/
+
+# Logs
+*.log
+
+# SQLite
+*.db
+
+# node / frontend
+/front/node_modules/
+/front/.next/
+/front/.turbo/
+/front/build/
+/front/dist/
+front/.env
+
+# Local env folder (if present)
+/env/
+
+# OS files
+Thumbs.db
+
+# Secrets
+.env.local
+.env.*.local
+
+# Temporary
+tmp/
+*.swp
