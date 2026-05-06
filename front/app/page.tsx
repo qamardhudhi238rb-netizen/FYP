@@ -70,13 +70,13 @@ export default function LoginPage() {
           ))}
         </motion.div>
 
-        {/* Floating emojis */}
-        {['😊','😢','😠','😲','😨'].map((e, i) => (
-          <motion.div key={e} className="absolute text-2xl pointer-events-none select-none"
-            style={{ top: `${18 + i * 13}%`, right: `${8 + (i % 3) * 4}%`, opacity: .12 }}
-            animate={{ y: [0, -10, 0], rotate: [-4, 4, -4] }}
+        {/* Subtle decorative dots (replaces emoji decorations) */}
+        {['#FFD700', '#4169E1', '#DC143C', '#FF8C00', '#808080'].map((c, i) => (
+          <motion.div key={c} className="absolute pointer-events-none"
+            style={{ top: `${18 + i * 13}%`, right: `${8 + (i % 3) * 4}%`, opacity: 0.12 }}
+            animate={{ y: [0, -8, 0], scale: [1, 1.08, 1] }}
             transition={{ duration: 4 + i, repeat: Infinity, delay: i * .6, ease: 'easeInOut' }}>
-            {e}
+            <div style={{ width: 36, height: 36, borderRadius: 18, backgroundColor: c }} className="filter blur-sm" />
           </motion.div>
         ))}
       </div>

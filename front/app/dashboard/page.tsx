@@ -3,10 +3,11 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Eye, LogOut, Zap, BarChart3, Camera, AlertCircle, ChevronRight, Upload } from 'lucide-react'
+import { Eye, LogOut, Zap, BarChart3, Camera, AlertCircle, ChevronRight, Upload, Lock } from 'lucide-react'
 import { api, getToken, clearToken, type AnalysisResult, type UserData } from '@/lib/api'
 import FileUpload from '@/components/FileUpload'
 import AnalysisResultPanel from '@/components/AnalysisResultPanel'
+import { EMOTION_META } from '@/components/EmotionBreakdown'
 import dynamic from 'next/dynamic'
 
 // Dynamically import RealtimeCamera (uses browser APIs — no SSR)
@@ -208,17 +209,11 @@ export default function DashboardPage() {
             className="card p-5">
             <p className="text-[10px] font-mono text-zinc-600 uppercase tracking-widest mb-4">Emotions</p>
             <div className="grid grid-cols-2 gap-2">
-              {[
-                { label: 'Happy',    color: '#FFD700' },
-                { label: 'Sad',      color: '#4169E1' },
-                { label: 'Angry',    color: '#DC143C' },
-                { label: 'Fear',     color: '#800080' },
-                { label: 'Surprise', color: '#FF8C00' },
-                { label: 'Disgust',  color: '#228B22' },
-                { label: 'Neutral',  color: '#808080' },
-              ].map(e => (
+              {Object.values(EMOTION_META).map(e => (
                 <div key={e.label} className="flex items-center gap-2">
-                  <span className="w-3 h-3 rounded-full" style={{ backgroundColor: e.color }} />
+                  <span className="w-4 h-4 flex items-center justify-center" style={{ color: e.color }}>
+                    <e.Icon className="w-4 h-4" />
+                  </span>
                   <span className="text-xs text-zinc-500">{e.label}</span>
                   <div className="ml-auto w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: e.color }} />
                 </div>
@@ -226,8 +221,9 @@ export default function DashboardPage() {
             </div>
           </motion.div>
 
-          <p className="text-[11px] text-zinc-700 text-center font-mono leading-relaxed px-2">
-            🔒 Media processed in-memory. Nothing stored or retained.
+          <p className="text-[11px] text-zinc-700 text-center font-mono leading-relaxed px-2 flex items-center justify-center gap-2">
+            <Lock size={12} className="text-zinc-700" />
+            <span>Media processed in-memory. Nothing stored or retained.</span>
           </p>
         </div>
       </main>
