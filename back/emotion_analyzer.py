@@ -27,13 +27,13 @@ EMOTION_COLORS: Dict[str, str] = {
 }
 
 EMOTION_ICONS: Dict[str, str] = {
-    "happy":    "😊",
-    "sad":      "😢",
-    "angry":    "😠",
-    "fear":     "😨",
-    "surprise": "😲",
-    "disgust":  "🤢",
-    "neutral":  "😐",
+    "happy":    "",
+    "sad":      "",
+    "angry":    "",
+    "fear":     "",
+    "surprise": "",
+    "disgust":  "",
+    "neutral":  "",
 }
 
 
@@ -74,7 +74,7 @@ def _face_result(raw: Dict[str, Any], idx: int) -> Dict[str, Any]:
         "emotions": emotions,
         "region": raw.get("region", {}),
         "color":  EMOTION_COLORS.get(dominant, "#808080"),
-        "icon":   EMOTION_ICONS.get(dominant,  "😐"),
+        "icon":   EMOTION_ICONS.get(dominant,  ""),
     }
 
 
@@ -84,7 +84,7 @@ def _overall(faces: List[Dict[str, Any]]) -> Dict[str, Any]:
             "dominant_emotion": "neutral",
             "emotions": {"neutral": 100.0},
             "color":  EMOTION_COLORS["neutral"],
-            "icon":   EMOTION_ICONS["neutral"],
+                "icon":   EMOTION_ICONS["neutral"],
         }
     agg = _avg_scores([f["emotions"] for f in faces])
     dom = _dominant(agg)
@@ -172,7 +172,7 @@ def analyze_frame_bytes(frame_bytes: bytes) -> Dict[str, Any]:
             "confidence":       round(emotions.get(dominant, 0), 1),
             "region":           region,        # {x,y,w,h} in resized coords — frontend scales
             "color":            EMOTION_COLORS.get(dominant, "#808080"),
-            "icon":             EMOTION_ICONS.get(dominant,  "😐"),
+            "icon":             EMOTION_ICONS.get(dominant,  ""),
         })
 
     overall = _overall(faces)
@@ -283,7 +283,7 @@ def _process_video(path: str) -> Dict[str, Any]:
             "dominant_emotion": dom,
             "emotions":         pcts,
             "color":  EMOTION_COLORS.get(dom, "#808080"),
-            "icon":   EMOTION_ICONS.get(dom,  "😐"),
+                "icon":   EMOTION_ICONS.get(dom,  ""),
         },
         "emotional_journey": [
             {"time": s["start_formatted"], "emotion": s["emotion"],
@@ -326,7 +326,7 @@ def _make_seg(emo: str, start: float, end: float, scrs: List[Dict]) -> Dict[str,
         "confidence":       round(avg.get(emo, 0), 1),
         "emotion_scores":   avg,
         "color":            EMOTION_COLORS.get(emo, "#808080"),
-        "icon":             EMOTION_ICONS.get(emo,  "😐"),
+                "icon":             EMOTION_ICONS.get(emo,  ""),
     }
 
 

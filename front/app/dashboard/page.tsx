@@ -165,7 +165,9 @@ export default function DashboardPage() {
             {history.length === 0 ? (
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}
                 className="card p-8 text-center">
-                <div className="text-4xl mb-3 opacity-20">🎭</div>
+                <div className="mb-3 opacity-20">
+                  <div className="w-12 h-12 rounded-full bg-mist mx-auto" />
+                </div>
                 <p className="text-zinc-600 text-sm">Analyses will appear here</p>
               </motion.div>
             ) : (
@@ -179,7 +181,7 @@ export default function DashboardPage() {
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-xl flex items-center justify-center text-lg flex-shrink-0"
                         style={{ backgroundColor: `${h.result.overall.color}14`, border: `1px solid ${h.result.overall.color}28` }}>
-                        {h.result.overall.icon}
+                        <span className="w-3.5 h-3.5 rounded-full" style={{ backgroundColor: h.result.overall.color }} />
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="text-white text-xs font-medium truncate">
@@ -207,19 +209,18 @@ export default function DashboardPage() {
             <p className="text-[10px] font-mono text-zinc-600 uppercase tracking-widest mb-4">Emotions</p>
             <div className="grid grid-cols-2 gap-2">
               {[
-                { icon: '😊', label: 'Happy',    color: '#FFD700' },
-                { icon: '😢', label: 'Sad',      color: '#4169E1' },
-                { icon: '😠', label: 'Angry',    color: '#DC143C' },
-                { icon: '😨', label: 'Fear',     color: '#800080' },
-                { icon: '😲', label: 'Surprise', color: '#FF8C00' },
-                { icon: '🤢', label: 'Disgust',  color: '#228B22' },
-                { icon: '😐', label: 'Neutral',  color: '#808080' },
+                { label: 'Happy',    color: '#FFD700' },
+                { label: 'Sad',      color: '#4169E1' },
+                { label: 'Angry',    color: '#DC143C' },
+                { label: 'Fear',     color: '#800080' },
+                { label: 'Surprise', color: '#FF8C00' },
+                { label: 'Disgust',  color: '#228B22' },
+                { label: 'Neutral',  color: '#808080' },
               ].map(e => (
                 <div key={e.label} className="flex items-center gap-2">
-                  <span className="text-sm">{e.icon}</span>
+                  <span className="w-3 h-3 rounded-full" style={{ backgroundColor: e.color }} />
                   <span className="text-xs text-zinc-500">{e.label}</span>
-                  <div className="ml-auto w-2 h-2 rounded-full flex-shrink-0"
-                    style={{ backgroundColor: e.color }} />
+                  <div className="ml-auto w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: e.color }} />
                 </div>
               ))}
             </div>

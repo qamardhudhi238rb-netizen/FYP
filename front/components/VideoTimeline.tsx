@@ -39,13 +39,16 @@ export default function VideoTimeline({ segments, totalDuration, durationFormatt
                 <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100
                   transition-opacity z-20 pointer-events-none whitespace-nowrap">
                   <div className="bg-charcoal border border-border rounded-lg px-2.5 py-1.5 shadow-xl text-center">
-                    <p className="text-[11px] font-mono text-white">{seg.icon} {seg.emotion}</p>
+                    <div className="flex items-center justify-center gap-2">
+                      <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: seg.color }} />
+                      <p className="text-[11px] font-mono text-white">{seg.emotion}</p>
+                    </div>
                     <p className="text-[10px] text-zinc-500">{seg.start_formatted}–{seg.end_formatted}</p>
                   </div>
                 </div>
                 {pct > 7 && (
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-xs text-white/70 select-none">{seg.icon}</span>
+                    <span className="text-xs text-white/70 select-none">{seg.emotion}</span>
                   </div>
                 )}
               </motion.div>
@@ -67,9 +70,8 @@ export default function VideoTimeline({ segments, totalDuration, durationFormatt
             style={{ borderColor: open === i ? `${seg.color}35` : '#32323C',
               backgroundColor: open === i ? `${seg.color}07` : 'transparent' }}
             onClick={() => setOpen(open === i ? null : i)}>
-            <div className="flex items-center gap-3 px-4 py-3">
+              <div className="flex items-center gap-3 px-4 py-3">
               <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: seg.color }} />
-              <span className="text-lg">{seg.icon}</span>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
                   <span className="text-white text-sm font-medium capitalize">{seg.emotion}</span>

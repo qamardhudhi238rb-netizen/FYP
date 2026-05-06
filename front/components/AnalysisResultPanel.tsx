@@ -78,7 +78,7 @@ function ImageContent({ result, file }: { result: ImageResult; file: File }) {
           </div>
           <EmotionBreakdown
             emotions={result.overall.emotions} dominant={result.overall.dominant_emotion}
-            color={result.overall.color} icon={result.overall.icon} title="Overall" />
+            color={result.overall.color} title="Overall" />
         </div>
       </div>
 
@@ -96,7 +96,7 @@ function ImageContent({ result, file }: { result: ImageResult; file: File }) {
                 </p>
                 <EmotionBreakdown
                   emotions={face.emotions} dominant={face.dominant_emotion}
-                  color={face.color} icon={face.icon} compact />
+                  color={face.color} compact />
               </motion.div>
             ))}
           </div>
@@ -126,7 +126,7 @@ function VideoContent({ result }: { result: VideoResult }) {
 
       <EmotionBreakdown
         emotions={result.overall.emotions} dominant={result.overall.dominant_emotion}
-        color={result.overall.color} icon={result.overall.icon}
+        color={result.overall.color}
         title="Overall Emotion Distribution" />
 
       <VideoTimeline

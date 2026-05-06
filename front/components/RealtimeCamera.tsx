@@ -156,7 +156,7 @@ export default function RealtimeCamera() {
 
   const dominantEmotion = frameRes?.overall.dominant_emotion ?? 'neutral'
   const dominantColor   = frameRes?.overall.color ?? '#808080'
-  const dominantIcon    = frameRes?.overall.icon  ?? '😐'
+  const dominantIcon    = frameRes?.overall.icon  ?? ''
   const scores          = (frameRes?.overall.emotions ?? {}) as Record<string, number>
   const sortedScores    = Object.entries(scores).sort(([, a], [, b]) => b - a)
 
@@ -251,7 +251,7 @@ export default function RealtimeCamera() {
             className="absolute bottom-3 left-3 pointer-events-none">
             <div className="flex items-center gap-2 bg-black/70 backdrop-blur-sm rounded-xl px-3 py-2 border"
               style={{ borderColor: `${dominantColor}40` }}>
-              <span className="text-xl">{dominantIcon}</span>
+              <span className="w-8 h-8 rounded-full flex-shrink-0" style={{ backgroundColor: dominantColor }} />
               <div>
                 <p className="text-white text-sm font-display capitalize">{dominantEmotion}</p>
                 <p className="text-zinc-400 text-[10px] font-mono">
@@ -286,11 +286,11 @@ export default function RealtimeCamera() {
             </div>
           </div>
 
-          {sortedScores.map(([emo, val]) => {
-            const meta = EMOTION_META[emo] ?? { icon: '❓', color: '#808080', label: emo }
+                {sortedScores.map(([emo, val]) => {
+            const meta = EMOTION_META[emo] ?? { color: '#808080', label: emo }
             return (
               <div key={emo} className="flex items-center gap-3">
-                <span className="text-sm w-5 text-center flex-shrink-0">{meta.icon}</span>
+                <span className="w-3 h-3 rounded-full flex-shrink-0" style={{ backgroundColor: meta.color }} />
                 <span className="text-[11px] text-zinc-500 w-14 font-mono capitalize flex-shrink-0">{meta.label}</span>
                 <div className="flex-1 h-2 bg-mist rounded-full overflow-hidden">
                   {/* Animate width every render — no key change needed, framer handles it */}
@@ -365,9 +365,9 @@ function FaceOverlay({ faces, videoEl }: { faces: FaceResult[]; videoEl: HTMLVid
             }}>
             {/* Label — un-flip so text reads correctly */}
             <div className="absolute -top-7 left-0 whitespace-nowrap" style={{ transform: 'scaleX(-1)' }}>
-              <div className="flex items-center gap-1 rounded-md px-2 py-0.5 text-[11px] font-mono text-white"
+              <div className="flex items-center gap-2 rounded-md px-2 py-0.5 text-[11px] font-mono text-white"
                 style={{ backgroundColor: `${face.color}CC` }}>
-                <span>{face.icon}</span>
+                <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: face.color }} />
                 <span className="capitalize">{face.dominant_emotion}</span>
                 <span className="opacity-70">{face.confidence?.toFixed(0) ?? face.emotions[face.dominant_emotion]?.toFixed(0)}%</span>
               </div>

@@ -2,14 +2,14 @@
 
 import { motion } from 'framer-motion'
 
-export const EMOTION_META: Record<string, { icon: string; color: string; label: string }> = {
-  happy:    { icon: '😊', color: '#FFD700', label: 'Happy'    },
-  sad:      { icon: '😢', color: '#4169E1', label: 'Sad'      },
-  angry:    { icon: '😠', color: '#DC143C', label: 'Angry'    },
-  fear:     { icon: '😨', color: '#800080', label: 'Fear'     },
-  surprise: { icon: '😲', color: '#FF8C00', label: 'Surprise' },
-  disgust:  { icon: '🤢', color: '#228B22', label: 'Disgust'  },
-  neutral:  { icon: '😐', color: '#808080', label: 'Neutral'  },
+export const EMOTION_META: Record<string, { color: string; label: string }> = {
+  happy:    { color: '#FFD700', label: 'Happy'    },
+  sad:      { color: '#4169E1', label: 'Sad'      },
+  angry:    { color: '#DC143C', label: 'Angry'    },
+  fear:     { color: '#800080', label: 'Fear'     },
+  surprise: { color: '#FF8C00', label: 'Surprise' },
+  disgust:  { color: '#228B22', label: 'Disgust'  },
+  neutral:  { color: '#808080', label: 'Neutral'  },
 }
 
 interface BarProps {
@@ -20,12 +20,12 @@ interface BarProps {
 }
 
 export function EmotionBar({ emotion, score, delay = 0, dominant = false }: BarProps) {
-  const meta = EMOTION_META[emotion] ?? { icon: '❓', color: '#808080', label: emotion }
+  const meta = EMOTION_META[emotion] ?? { color: '#808080', label: emotion }
   return (
     <motion.div initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }}
       transition={{ delay, duration: .35 }}
       className={`flex items-center gap-3 py-1 ${dominant ? '' : 'opacity-65'}`}>
-      <span className="text-sm w-5 text-center flex-shrink-0">{meta.icon}</span>
+      <span className="w-3 h-3 rounded-full flex-shrink-0" style={{ backgroundColor: meta.color }} />
       <span className="text-[11px] text-zinc-500 w-14 font-mono capitalize flex-shrink-0">{meta.label}</span>
       <div className="flex-1 h-1.5 bg-mist rounded-full overflow-hidden">
         <motion.div className="h-full rounded-full"
@@ -63,7 +63,8 @@ export function EmotionBreakdown({ emotions, dominant, color, icon, title, compa
         <motion.div initial={{ scale: .93, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
           className="flex items-center gap-3 rounded-xl p-4 mb-4 border"
           style={{ backgroundColor: `${color}10`, borderColor: `${color}22` }}>
-          <span className="text-3xl">{icon}</span>
+          <span className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
+            style={{ backgroundColor: color, boxShadow: `0 6px 18px ${color}22` }} />
           <div>
             <p className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">Dominant</p>
             <p className="text-white font-display text-xl capitalize">{dominant}</p>
