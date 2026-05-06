@@ -1,4 +1,4 @@
-# EmoVision
+# EmoVision 2.0
 
 EmoVision is a lightweight web application for real-time facial expression and emotion analysis. It provides:
 
